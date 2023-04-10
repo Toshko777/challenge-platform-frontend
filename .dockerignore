@@ -1,0 +1,13 @@
+src
+e2e
+deployment
+.idea
+.editorconfig
+.gitignore
+.gitlab-ci.yml
+angular.json
+README.md
+tsconfig.json
+tslint.json
+package.json
+node_modules
