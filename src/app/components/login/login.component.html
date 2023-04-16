@@ -1,11 +1,29 @@
-<form (ngSubmit)="login()" #loginForm="ngForm">
-  <div>
-    <label for="usernameOrEmail">Username or Email:</label>
-    <input type="text" id="usernameOrEmail" name="usernameOrEmail" [(ngModel)]="credentials.usernameOrEmail" required>
-  </div>
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" [(ngModel)]="credentials.password" required>
-  </div>
-  <button type="submit" [disabled]="!loginForm.valid">Login</button>
-</form>
+<div class="container">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" required>
+          <mat-error *ngIf="loginForm.controls.username.hasError('required')">Username is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" required>
+          <mat-error *ngIf="loginForm.controls.password.hasError('required')">Password is required</mat-error>
+        </mat-form-field>
+
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+          <button mat-raised-button color="primary" routerLink="/register">Register</button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

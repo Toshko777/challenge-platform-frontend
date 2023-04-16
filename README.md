@@ -15,3 +15,6 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 the nginx/default.conf is important for configuring nginx server
 
+
+---
+- [ ] LogIn страница

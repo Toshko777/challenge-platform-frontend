@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,24 +10,43 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  credentials = {usernameOrEmail: '', password: ''};
+  
+  loginForm: FormGroup;
+  error: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
-  login() {
-    this.authService.signin(this.credentials).subscribe(
-      response => {
-        // handle successful login
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+  onSubmit() {
+    const usernameOrEmail = this.loginForm.value.username;
+    const password = this.loginForm.value.password;
+
+    this.authService.signin({ usernameOrEmail, password })
+      .subscribe(response => {
+        console.log(response);
         const token = response.accessToken;
         if (token) {
-          localStorage.setItem('currentUser', JSON.stringify({ username: this.credentials.usernameOrEmail, token: token }));
+          localStorage.setItem('jwt', token);
+          console.log('Token saved to localStorage.');
+          this.router.navigate(['/dashboard']);
         }
 
-        console.log("response: ", response)
       },
-      error => {
-        // handle login error
-      }
-    );
+        error => {
+          console.error(error);
+          this.error = 'Incorrect username or password.';
+        }
+      );
   }
+
 }
