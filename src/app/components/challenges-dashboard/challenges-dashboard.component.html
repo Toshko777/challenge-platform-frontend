@@ -1,3 +1,24 @@
 <app-navbar></app-navbar>
 
-<p>challenges-dashboard works!</p>
+<table mat-table [dataSource]="dataSource" class="custom-table">
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    </ng-container>
+    <ng-container matColumnDef="creator">
+        <th mat-header-cell *matHeaderCellDef>Creator</th>
+        <td mat-cell *matCellDef="let element">{{ element.creatorId }}</td>
+    </ng-container>
+    <ng-container matColumnDef="button">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-raised-button color="primary" (click)="onButtonClick(element)">Click</button>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

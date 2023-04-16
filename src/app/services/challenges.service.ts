@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Challenge } from '../models/challenge';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,9 @@ export class ChallengesService {
   constructor(private http: HttpClient) { }
 
 
-  getAllProjects(): Observable<any> {
-    
+  getAllChallenges(): Observable<any> {
     return this.http.get('/api/all-challenges');
   }
+
+  // todo - create/edit challenge
 }
