@@ -27,6 +27,20 @@
 
     <mat-divider></mat-divider>
 
+    <h3>Challenges:</h3>
+    <mat-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon>check_circle</mat-icon>
+        <h3 mat-line>Finished: {{ finished }}</h3>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>history</mat-icon>
+        <h3 mat-line>In progress: {{ inProgress }}</h3>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-divider></mat-divider>
+
     <h3>Badges:</h3>
     <mat-chip-list>
       <mat-chip *ngFor="let badge of user.badges" color="primary">{{ badge }}</mat-chip>

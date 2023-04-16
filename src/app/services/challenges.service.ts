@@ -20,5 +20,12 @@ export class ChallengesService {
     return this.http.get('/api/all-challenges');
   }
 
+  getUserChallenges(userId: number): Observable<any> {
+    return this.http.get(`/api/challenges/${userId}`);
+  }
+
+  getChallengeInfos(challengeId: number): Observable<any> {
+    return this.http.get(`/api/challenge/${challengeId}`)
+  }
   // todo - create/edit challenge
 }

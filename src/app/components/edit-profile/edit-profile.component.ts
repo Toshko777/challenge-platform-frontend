@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
+import { UserChallenge } from 'src/app/models/userChallenge';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { ChallengesService } from 'src/app/services/challenges.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -14,10 +16,15 @@ export class EditProfileComponent implements OnInit {
   user: User | undefined;
   userForm: FormGroup;
 
+  inProgress: number;
+  finished: number;
+
+
   constructor(
     private fb: FormBuilder,
     private usersService: UsersService,
-    private authService: AuthService
+    private authService: AuthService,
+    private challengesService: ChallengesService
   ) { }
 
   ngOnInit(): void {
@@ -25,6 +32,7 @@ export class EditProfileComponent implements OnInit {
       this.user = user;
       this.createForm();
     });
+    this.getUserChallenges();
   }
 
   createForm() {
@@ -54,4 +62,31 @@ export class EditProfileComponent implements OnInit {
     return control.hasError(errorName) ? `Invalid ${errorName}` : '';
   }
 
+  // count finished/unfinished challenges - code duplication..
+  getUserChallenges(): void {
+    this.challengesService.getUserChallenges(this.userId).subscribe(response => {
+      console.log(response);
+      // this.challenges = response
+      this.inProgress = this.countInProgress(response);
+      this.finished = this.countFinished(response);
+
+    });
+
+  }
+
+  countFinished(challenges: UserChallenge[]): number {
+    let finishedCount = challenges.reduce((count, challenge) => {
+      if (challenge.completed) {
+        count++;
+      }
+      return count;
+    }, 0);
+    return finishedCount;
+  }
+
+  countInProgress(challenges: UserChallenge[]): number {
+    const unfinishedItems = challenges.filter(challenge => challenge.completed === null);
+    const unfinishedItemCount = unfinishedItems.length;
+    return unfinishedItemCount;
+  }
 }
