@@ -1,7 +1,20 @@
-<nav>
-    <ul>
-        <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="/dashboard">Dashboard</a></li>
-        <li><a (click)="logout()">Logout</a></li>
-    </ul>
-</nav>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button routerLink="/dashboard" class="nav-link">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+        </button>
+
+        <button mat-icon-button routerLink="/profile" class="nav-link">
+            <mat-icon>account_circle</mat-icon>
+            <span>Profile</span>
+        </button>
+
+        <span class="fill-remaining-space"></span>
+
+        <button mat-icon-button (click)="logout()" class="nav-link">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>

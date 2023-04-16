@@ -1,0 +1,14 @@
+.fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+mat-toolbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.nav-link {
+    margin-right: 30px;
+}
