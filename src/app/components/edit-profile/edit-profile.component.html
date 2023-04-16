@@ -1,0 +1,76 @@
+<app-navbar></app-navbar>
+
+<!-- USER INFO -->
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>User Information</mat-card-title>
+  </mat-card-header>
+  <mat-card-content *ngIf="user">
+    <mat-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon>person</mat-icon>
+        <h3 mat-line>Name: {{ user.firstName }} {{ user.lastName }}</h3>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>account_circle</mat-icon>
+        <h3 mat-line>Username: {{ user.username }}</h3>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>email</mat-icon>
+        <h3 mat-line>Email: {{ user.email }}</h3>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>calendar_today</mat-icon>
+        <h3 mat-line>Created: {{ user.created | date }}</h3>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-divider></mat-divider>
+
+    <h3>Badges:</h3>
+    <mat-chip-list>
+      <mat-chip *ngFor="let badge of user.badges" color="primary">{{ badge }}</mat-chip>
+    </mat-chip-list>
+
+    <!-- if there is problems with fetching the user informaton -> show this alternatives loading or error -->
+    <mat-card-content *ngIf="!user">
+      <p>Loading user information...</p>
+    </mat-card-content>
+    <mat-card-content *ngIf="error">
+      <p>An error occurred: {{ error }}</p>
+    </mat-card-content>
+
+  </mat-card-content>
+</mat-card>
+
+
+<!-- USER EDIT  -->
+<mat-card *ngIf="userForm">
+  <mat-card-header>
+    <mat-card-title>Edit User Information</mat-card-title>
+  </mat-card-header>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput placeholder="First Name" formControlName="firstName">
+      <mat-error>{{ getErrorMessage('firstName', 'required') }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Last Name" formControlName="lastName">
+      <mat-error>{{ getErrorMessage('lastName', 'required') }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email">
+      <mat-error>{{ getErrorMessage('email', 'required') }}</mat-error>
+      <mat-error>{{ getErrorMessage('email', 'email') }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="password" placeholder="New Password" formControlName="password">
+      <mat-error>{{ getErrorMessage('password', 'minlength') }}</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Save</button>
+  </form>
+</mat-card>

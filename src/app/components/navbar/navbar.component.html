@@ -10,12 +10,17 @@
             <span>Users</span>
         </button>
 
-        <button mat-icon-button routerLink="/profile" class="nav-link">
+        <button mat-icon-button routerLink="/edit-profile" class="nav-link">
             <mat-icon>account_circle</mat-icon>
             <span>Profile</span>
         </button>
 
         <span class="fill-remaining-space"></span>
+
+        <button mat-icon-button routerLink="/about" class="nav-link">
+            <mat-icon>info</mat-icon>
+            <span>About</span>
+        </button>
 
         <button mat-icon-button (click)="logout()" class="nav-link">
             <mat-icon>logout</mat-icon>

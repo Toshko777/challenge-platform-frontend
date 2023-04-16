@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  
+
   loginForm: FormGroup;
   error: string;
 
@@ -32,15 +32,9 @@ export class LoginComponent {
     const password = this.loginForm.value.password;
 
     this.authService.signin({ usernameOrEmail, password })
-      .subscribe(response => {
-        console.log(response);
-        const token = response.accessToken;
-        if (token) {
-          localStorage.setItem('jwt', token);
-          console.log('Token saved to localStorage.');
-          this.router.navigate(['/dashboard']);
-        }
-
+      .subscribe(() => {
+        console.log("successful log in");
+        this.router.navigate(['/dashboard']);
       },
         error => {
           console.error(error);
