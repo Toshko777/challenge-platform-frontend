@@ -19,6 +19,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
 
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
@@ -57,6 +59,7 @@ import { CreateChallengeComponent } from './components/create-challenge/create-c
     MatSnackBarModule,
     MatListModule,
     MatChipsModule,
+    MatPaginatorModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

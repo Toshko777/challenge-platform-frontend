@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChallengesService } from 'src/app/services/challenges.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Challenge } from 'src/app/models/challenge';
 import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-challenges-dashboard',
@@ -11,7 +13,9 @@ import { Router } from '@angular/router';
 })
 export class ChallengesDashboardComponent implements OnInit {
 
-  dataSource = new MatTableDataSource<Challenge>();
+  dataSource: MatTableDataSource<Challenge>;
+
+  totalElementsCount: number;
 
   displayedColumns: string[] = ['name', 'description', 'creator', 'button'];
 
@@ -21,16 +25,23 @@ export class ChallengesDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getAllChallenges();
+    this.fetchChallenges(0, 10);
   }
 
-  getAllChallenges() {
-    return this.challengeService.getAllChallenges().subscribe(
+  fetchChallenges(pageNumber: number, pageSize: number) {
+    let params = new HttpParams().set('pageNo', pageNumber).set('pageSize', pageSize);
+    return this.challengeService.getAllChallenges(params).subscribe(
       (data) => {
-        // console.log(data);
-        this.dataSource.data = data.content;
+        this.totalElementsCount = data.totalElements;
+        this.dataSource = new MatTableDataSource(data.content);
       }
     );
+  }
+
+  onPageChanged(event: any) {
+    const pageIndex = event.pageIndex;
+    const pageSize = event.pageSize;
+    this.fetchChallenges(pageIndex, pageSize);
   }
 
   onButtonClick(data: Challenge) {

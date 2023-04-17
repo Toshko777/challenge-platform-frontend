@@ -1,7 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Challenge } from '../models/challenge';
 import { StartOrFinishChallenge } from '../models/startOrFinishChallenge';
 import { NewChallenge } from '../models/newChallenge';
 
@@ -16,8 +15,8 @@ export class ChallengesService {
 
   constructor(private http: HttpClient) { }
 
-  getAllChallenges(): Observable<any> {
-    return this.http.get('/api/all-challenges');
+  getAllChallenges(params?: HttpParams): Observable<any> {
+    return this.http.get('/api/all-challenges', { params: params });
   }
 
   getUserChallenges(userId: number): Observable<any> {
