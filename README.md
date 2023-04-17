@@ -17,4 +17,4 @@ the nginx/default.conf is important for configuring nginx server
 
 
 ---
-- [ ] LogIn страница
+- [x] LogIn страница

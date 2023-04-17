@@ -10,10 +10,11 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ChallengeComponent } from './components/challenge/challenge.component';
 import { CreateChallengeComponent } from './components/create-challenge/create-challenge.component';
+import { AboutComponent } from './components/about/about.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: ChallengesDashboardComponent, canActivate: [AuthGuard] },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'user/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
   { path: 'challenge/:id', component: ChallengeComponent, canActivate: [AuthGuard] },
-  { path: 'create-challenge', component: CreateChallengeComponent, canActivate: [AuthGuard] }
+  { path: 'create-challenge', component: CreateChallengeComponent, canActivate: [AuthGuard] },
+  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

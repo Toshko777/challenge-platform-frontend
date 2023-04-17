@@ -3,6 +3,7 @@ import { NewChallenge } from 'src/app/models/newChallenge';
 import { ChallengesService } from 'src/app/services/challenges.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-challenge',
@@ -19,7 +20,8 @@ export class CreateChallengeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private challengesService: ChallengesService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -36,8 +38,9 @@ export class CreateChallengeComponent implements OnInit {
       this.challenge = this.challengeForm.value;
       this.challenge.creatorId = this.userId;
       this.challengesService.createChallenge(this.challenge).subscribe(response => {
-        console.log(response)
+        console.debug(response);
         this.snackBar.open('Challenge created successfully', 'Close', { duration: 3000 });
+        this.router.navigate(['/dashboard']);
         // push popup with "success" -> when succeeded 
       }, err => {
         console.log('Failed to create challenge: ', err);

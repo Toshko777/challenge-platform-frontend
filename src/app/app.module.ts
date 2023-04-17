@@ -33,6 +33,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ChallengeComponent } from './components/challenge/challenge.component';
 import { CreateChallengeComponent } from './components/create-challenge/create-challenge.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CreateChallengeComponent } from './components/create-challenge/create-c
     UserProfileComponent,
     EditProfileComponent,
     ChallengeComponent,
-    CreateChallengeComponent
+    CreateChallengeComponent,
+    AboutComponent
   ],
   imports: [
     ReactiveFormsModule,
