@@ -29,6 +29,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { UsersDashboardsComponent } from './components/users-dashboards/users-dashboards.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { ChallengeComponent } from './components/challenge/challenge.component';
+import { CreateChallengeComponent } from './components/create-challenge/create-challenge.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     RegisterComponent,
     UsersDashboardsComponent,
     UserProfileComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    ChallengeComponent,
+    CreateChallengeComponent
   ],
   imports: [
     ReactiveFormsModule,

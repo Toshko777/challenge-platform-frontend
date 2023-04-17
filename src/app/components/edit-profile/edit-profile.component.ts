@@ -65,8 +65,8 @@ export class EditProfileComponent implements OnInit {
   // count finished/unfinished challenges - code duplication..
   getUserChallenges(): void {
     this.challengesService.getUserChallenges(this.userId).subscribe(response => {
-      console.log(response);
-      // this.challenges = response
+      console.debug(response);
+      
       this.inProgress = this.countInProgress(response);
       this.finished = this.countFinished(response);
 

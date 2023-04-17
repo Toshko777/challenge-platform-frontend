@@ -41,8 +41,6 @@ export class UserProfileComponent implements OnInit {
 
   getUserChallenges(): void {
     this.challengesService.getUserChallenges(this.userId).subscribe(response => {
-      console.log(response);
-      // this.challenges = response
       this.inProgress = this.countInProgress(response);
       this.finished = this.countFinished(response);
 

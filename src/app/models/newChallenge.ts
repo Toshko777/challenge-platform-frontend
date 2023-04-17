@@ -1,7 +1,5 @@
-export interface Challenge {
-    id: number;
+export interface NewChallenge {
     name: string;
     description: string;
     creatorId: number;
-    created: Date
 }

@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Challenge Information</mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngIf="challenge">
+        <mat-list>
+            <mat-list-item>
+                <mat-icon mat-list-icon>person</mat-icon>
+                <h3 mat-line>Name: {{ challenge.name }} </h3>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon mat-list-icon>account_circle</mat-icon>
+                <h3 mat-line>Description: {{ challenge.description }}</h3>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon mat-list-icon>email</mat-icon>
+                <h3 mat-line>Creator: {{ challenge.creatorId }}</h3>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon mat-list-icon>calendar_today</mat-icon>
+                <h3 mat-line>Created: {{ challenge.created | date }}</h3>
+            </mat-list-item>
+        </mat-list>
+
+        <mat-divider></mat-divider>
+
+        <!-- button join & finish -->
+        <button mat-raised-button color="primary" (click)="startChallenge(challenge.id)"
+            [disabled]="started">START!</button>
+        <button mat-raised-button color="primary" (click)="finishChallenge(challenge.id)"
+            [disabled]="finished">FINISH!</button>
+
+        <!-- if there is problems with fetching the user informaton -> show this alternatives loading or error -->
+        <mat-card-content *ngIf="!challenge">
+            <p>Loading user information...</p>
+        </mat-card-content>
+        <mat-card-content *ngIf="error">
+            <p>An error occurred: {{ error }}</p>
+        </mat-card-content>
+    </mat-card-content>
+</mat-card>

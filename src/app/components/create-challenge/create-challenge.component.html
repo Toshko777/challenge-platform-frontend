@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+
+<mat-card>
+    <mat-card-title>Create a New Challenge</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="challengeForm" (ngSubmit)="createChallenge()">
+            <mat-form-field>
+                <input matInput placeholder="Name" formControlName="name">
+                <mat-error *ngIf="challengeForm.get('name').invalid">{{getErrorMessage('name')}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <textarea matInput placeholder="Description" formControlName="description"></textarea>
+                <mat-error
+                    *ngIf="challengeForm.get('description').invalid">{{getErrorMessage('description')}}</mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="challengeForm.invalid">Create
+                Challenge</button>
+        </form>
+    </mat-card-content>
+</mat-card>

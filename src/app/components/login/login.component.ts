@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -33,12 +35,13 @@ export class LoginComponent {
 
     this.authService.signin({ usernameOrEmail, password })
       .subscribe(() => {
-        console.log("successful log in");
+        console.debug("successful log in");
         this.router.navigate(['/dashboard']);
       },
         error => {
-          console.error(error);
-          this.error = 'Incorrect username or password.';
+          console.debug("Error status: ", error.status);
+          console.debug("Error message: ", error.message);
+          this.snackBar.open('Incorect username/email or password!', 'Close', { duration: 3000 });
         }
       );
   }

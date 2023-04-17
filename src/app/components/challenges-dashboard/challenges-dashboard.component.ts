@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChallengesService } from 'src/app/services/challenges.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Challenge } from 'src/app/models/challenge';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-challenges-dashboard',
@@ -12,9 +13,12 @@ export class ChallengesDashboardComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Challenge>();
 
-  displayedColumns: string[] = ['name', 'description', 'button'];
+  displayedColumns: string[] = ['name', 'description', 'creator', 'button'];
 
-  constructor(private challengeService: ChallengesService) { }
+  constructor(
+    private challengeService: ChallengesService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.getAllChallenges();
@@ -23,16 +27,15 @@ export class ChallengesDashboardComponent implements OnInit {
   getAllChallenges() {
     return this.challengeService.getAllChallenges().subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.dataSource.data = data.content;
       }
     );
   }
 
-  // Function to handle button click
   onButtonClick(data: Challenge) {
-    // todo
-    console.log(data);
+    // console.log(data);
+    this.router.navigate(['/challenge/', data.id], {state: { data: data }});
   }
 
 }
