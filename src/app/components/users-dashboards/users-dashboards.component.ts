@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -9,9 +10,11 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './users-dashboards.component.html',
   styleUrls: ['./users-dashboards.component.css']
 })
-export class UsersDashboardsComponent implements OnInit{
+export class UsersDashboardsComponent implements OnInit {
 
   dataSource = new MatTableDataSource<User>();
+
+  totalElementsCount: number;
 
   displayedColumns: string[] = ['name', 'username', 'created', 'button'];
 
@@ -21,21 +24,29 @@ export class UsersDashboardsComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.getAllUsers();
+    this.fetchUsers(0, 10);
   }
 
-  getAllUsers(): void {
-    this.usersService.getAllUsers().subscribe(
+  fetchUsers(pageNumber: number, pageSize: number): void {
+    let params = new HttpParams().set('pageNo', pageNumber).set('pageSize', pageSize);
+    this.usersService.getAllUsers(params).subscribe(
       (data) => {
-        console.log(data);
+        this.totalElementsCount = data.totalElements;
+        console.debug(data);
         this.dataSource.data = data.content;
       }
     );
   }
 
+  onPageChanged(event: any) {
+    const pageIndex = event.pageIndex;
+    const pageSize = event.pageSize;
+    this.fetchUsers(pageIndex, pageSize);
+  }
+
   // Function to handle button click
   onButtonClick(data: User): void {
-    console.log(data);
+    console.debug(data);
     this.router.navigate(['/user/', data.id]);
   }
 

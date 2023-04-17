@@ -3,9 +3,7 @@ import { ChallengesService } from 'src/app/services/challenges.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Challenge } from 'src/app/models/challenge';
 import { Router } from '@angular/router';
-import { MatPaginator } from '@angular/material/paginator';
 import { HttpParams } from '@angular/common/http';
-
 @Component({
   selector: 'app-challenges-dashboard',
   templateUrl: './challenges-dashboard.component.html',
@@ -17,7 +15,7 @@ export class ChallengesDashboardComponent implements OnInit {
 
   totalElementsCount: number;
 
-  displayedColumns: string[] = ['name', 'description', 'creator', 'button'];
+  displayedColumns: string[] = ['name', 'description', 'button'];
 
   constructor(
     private challengeService: ChallengesService,
@@ -46,7 +44,7 @@ export class ChallengesDashboardComponent implements OnInit {
 
   onButtonClick(data: Challenge) {
     // console.log(data);
-    this.router.navigate(['/challenge/', data.id], {state: { data: data }});
+    this.router.navigate(['/challenge/', data.id], { state: { data: data } });
   }
 
 }

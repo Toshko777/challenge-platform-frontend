@@ -4,6 +4,8 @@ import { Challenge } from '../../models/challenge'
 import { ChallengesService } from 'src/app/services/challenges.service';
 import { UserChallenge } from 'src/app/models/userChallenge';
 import { StartOrFinishChallenge } from 'src/app/models/startOrFinishChallenge';
+import { UsersService } from 'src/app/services/users.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-challenge',
@@ -16,19 +18,21 @@ export class ChallengeComponent implements OnInit {
   challengeId: number;
   challenge: Challenge;
   challenges: UserChallenge[];
+  creator: User;
 
   started: boolean = false;
   finished: boolean = false;
 
   constructor(
-    private route: ActivatedRoute,
-    private challengesService: ChallengesService
+    private challengesService: ChallengesService,
+    private usersService: UsersService
   ) {
     this.challenge = history.state.data;
     this.challengeId = this.challenge.id;
   }
 
   ngOnInit(): void {
+    this.usersService.getUser(this.challenge.creatorId).subscribe(user => this.creator = user);
     this.checkButtonsStatus(this.challengeId);
   }
 

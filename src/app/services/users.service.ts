@@ -1,4 +1,4 @@
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
@@ -12,16 +12,15 @@ export class UsersService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  
+
   constructor(private http: HttpClient) { }
 
 
-  getAllUsers(): Observable<any> {
-    return this.http.get('/api/users');
+  getAllUsers(params?: HttpParams): Observable<any> {
+    return this.http.get('/api/users', { params: params });
   }
 
   getUser(id: number): Observable<any> {
-    console.log("getting user infos");
     return this.http.get(`/api/user/${id}`)
   }
 
@@ -30,5 +29,4 @@ export class UsersService {
     return this.http.put(`api/user/${id}`, user, this.httpOptions);
   }
 
-  // todo - create/edit challenge
 }

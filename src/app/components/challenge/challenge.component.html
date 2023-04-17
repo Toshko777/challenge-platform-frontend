@@ -4,7 +4,7 @@
     <mat-card-header>
         <mat-card-title>Challenge Information</mat-card-title>
     </mat-card-header>
-    <mat-card-content *ngIf="challenge">
+    <mat-card-content *ngIf="challenge && creator">
         <mat-list>
             <mat-list-item>
                 <mat-icon mat-list-icon>person</mat-icon>
@@ -16,7 +16,7 @@
             </mat-list-item>
             <mat-list-item>
                 <mat-icon mat-list-icon>email</mat-icon>
-                <h3 mat-line>Creator: {{ challenge.creatorId }}</h3>
+                <h3 mat-line>Creator: {{ creator.username }}</h3>
             </mat-list-item>
             <mat-list-item>
                 <mat-icon mat-list-icon>calendar_today</mat-icon>

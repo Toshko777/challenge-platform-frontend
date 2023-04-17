@@ -23,5 +23,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-
-<!-- routerLink="/user/{{element.id}}" -->
+<mat-paginator [pageSizeOptions]="[10, 20, 50]" [pageSize]="10" [length]="totalElementsCount"
+    (page)="onPageChanged($event)"></mat-paginator>
